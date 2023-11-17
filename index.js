@@ -17,22 +17,23 @@ const getQuotes = async () => {
   // On this new page:
   // - open the "http://quotes.toscrape.com/" website
   // - wait until the dom content is loaded (HTML is ready)
-//   await page.goto("http://quotes.toscrape.com/", {
-//     waitUntil: "domcontentloaded",
-//   });
-
-    // Sample Code Start here
-      await page.goto("https://automechanika-dubai.ae.messefrankfurt.com/dubai/en/exhibitor-search.html?q=Guangdong+Faret+Auto+Radiator+Co.+Ltd.", {
+  await page.goto("https://automechanika-dubai.ae.messefrankfurt.com/dubai/en/exhibitor-search.html?q=Meko%20Auto%20Components%20Inc.", {
     waitUntil: "domcontentloaded",
   });
+
+    // Sample Code Start here
+  //     await page.goto("https://boodmo.com/search/2630002752/", {
+  //   waitUntil: "domcontentloaded",
+  // });
     // Sample Code end here
 
+    await page.waitForSelector('.a-link--no-focus');
 
     const quotes = await page.evaluate(() => {
         // Fetch the first element with class "quote"
-        const quote = document.getElementsByClassName("a-link--no-focus").href;
-
-        customer_url = quote
+        let quote = document.querySelector(".a-link--no-focus").getAttribute("href")
+        // const val = b.querySelector("a").href
+        // const d = quote.querySelector("a").href
 
         // Fetch the sub-elements from the previously fetched quote element
         // Get the displayed text and return it (`.innerText`)
@@ -43,24 +44,25 @@ const getQuotes = async () => {
       });
 
 
-
+  // Query for an element handle.
 
 
 //   // Get page data
-//   const quotes = await page.evaluate(() => {
-//     // Fetch the first element with class "quote"
-//     const quote = document.querySelector(".quote");
+  // const quotes = await page.evaluate(() => {
+  //   // Fetch the first element with class "quote"
+  //   const quote  = document.querySelector("").href;
 
-//     // Fetch the sub-elements from the previously fetched quote element
-//     // Get the displayed text and return it (`.innerText`)
-//     const text = quote.querySelector(".text").innerText;
-//     const author = quote.querySelector(".author").innerText;
+  //   // Fetch the sub-elements from the previously fetched quote element
+  //   // Get the displayed text and return it (`.innerText`)
+  //   // const text = quote.querySelector(".text").innerText;
+  //   // const author = quote.querySelector(".author").innerText;
 
-//     return { text, author };
-//   });
+  //   return { quote };
+  // });
 
   // Display the quotes
   console.log(quotes);
+
 
 
 // // second data code start here
